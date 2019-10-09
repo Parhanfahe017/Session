@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_POST['Login'])) {
     $a = $_POST['user'];
     $b = $_POST['pass'];
@@ -9,15 +10,14 @@ if (isset($_POST['Login'])) {
         $_SESSION['login'] = $a;
         //menuju ke halaman pemeriksaan session
         echo "<h1>Anda berhasil LOGIN</h1>";
-        echo "<h2>Klik <a href='latihan01.php'>di sini</a>
-                untuk menuju ke halaman selanjutnya atau Klik
-                <a href='latihan02.php'>";
+        echo "<h2>Klik <a href='saol.php.php'>di sini</a>
+                untuk menuju ke halaman selanjutnya";
     } else {
         die("username atau password anda salah 
-        silahkan kembali login <a href=Login.php> Login </a>");
+        silahkan kembali login <a href=login02.php> Login </a>");
     }
 } else {
-        ?>
+    ?>
     <html>
 
     <head>
@@ -25,7 +25,11 @@ if (isset($_POST['Login'])) {
     </head>
 
     <body>
-    
+        <nav>
+            <a href="saol02.php">Halaman 1</a> |
+            <a href="login02.php">Halaman 2</a> |
+            <a href="logout.php">Halaman 3</a> |
+        </nav>
         <form action="" method="post">
             <h2>Login Here...</h2>
             Username : <input type="text" name="user"><br>
