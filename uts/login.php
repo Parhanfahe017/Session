@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if (isset($_POST['login'])) {
@@ -7,6 +8,7 @@ if (isset($_POST['login'])) {
     if ($a == "abdul" && $b == "123") {
         //menciptakan session
         $_SESSION['login'] = $a;
+    
         //menuju ke halaman pemeriksaan session
         echo "<h1>Selamat Datang abdul! anda berhasil Login</h1>";
         echo "<h2>Klik <a href='datadiri.php'>di sini</a>
@@ -38,7 +40,11 @@ if (isset($_POST['login'])) {
                         <div class="card-body">
             Username : <input type="text" name="user"><br>
             Password : <input type="password" name="pass"><br>
-            <input type="submit" name="login" value="Log In">
+
+     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="login">Log In</button>
+     <p>tidak memiliki akun?</p>
+       <button class="btn btn-outline-danger my-2 my-sm-0" type="daftar" name="reset">Daftar</button>
+                            </div>
         </form>
     </body>
 
@@ -46,3 +52,8 @@ if (isset($_POST['login'])) {
 <?php
 }
 ?>
+<?php
+session_start();
+if(isset($_SESSION['login'])) {
+      header("Location: datadiri.php");
+}?>

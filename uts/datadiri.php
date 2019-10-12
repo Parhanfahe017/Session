@@ -27,9 +27,9 @@ if(isset($_SESSION['login'])) {
 
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href=".php">Home<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="">Produk</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link active" href="login.php">Login<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="proses02.php">Produk</a>
+      <a class="nav-item nav-link" href="logout.php">Logout</a>
       <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
     </div>
   </div>
@@ -39,8 +39,9 @@ if(isset($_SESSION['login'])) {
         <div class="row" style="padding:20px">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header"><center>ASSALAAM BOOK STORE</center></div>
+                    <div class="card-header"><center>FORMULIR DATA DIRI</center></div>
                     <div class="card-body">
+                    
                         <form action="proses01.php" method="POST">
                             <div class="form-group">
                                 <label for="">Nama</label>

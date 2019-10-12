@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(isset($_SESSION['login'])) {
+?>
+<?php
     if (isset($_POST['byr'])) {
         $nama = $_POST['nm'];
         $alamat = $_POST['al'];
@@ -10,18 +14,17 @@
         $jns = $_POST['jenis'];
         $jdl = $_POST['jb'];
         $hrga = $_POST['harga'];
+
+        $a = array_sum($hrga);
         
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-        <meta charset="utf-8">
+   <meta charset="utf-8">
          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hasil</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -41,13 +44,14 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" name="logout">Logout</button>
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" name="logout.php">Logout</button>
     </form>
   </div>
 </nav>
     <!-- end Navbar -->
 
     <!-- content -->
+    <form action="kembalian.php" method = "post">
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="padding:20px">
@@ -82,7 +86,6 @@
                                     <th>Harga (Rp)</th>
                                 </tr>
                                 <?php foreach ($jdl as $key => $value) {
-                                    # code...
                                  ?>
                                 <tr>
                                     <td><?php echo $key+1; ?></td>
@@ -97,17 +100,18 @@
                                     <td align="center" colspan="6"><b>Total Pembayaran</b></td>
                                 </tr>
                                 <?php 
-                                    $a = array_sum($hrga);
-                                    if ($key >= 3) {
-                                        $disc = 0.05*$a;
-                                        $ttl = $a-$disc;
-                                    } if ($key >= 5) {
-                                        $disc = 0.1*$a;
-                                        $ttl = $a-$disc;
-                                    } else {
-                                        $disc = 0;
-                                        $ttl = $a;
+                                
+                                    if ($a >= 500000) {
+                                        $disc = $a*0.2;
+                                    }elseif ($a >= 250000) {
+                                        $disc = $a*0.1;
+                                    }elseif ($a>=150000) {
+                                        $disc = $a*0.05;
+                                    } 
+                                    else {
+                                        $disc = $a-0;
                                     }
+                                    $sub = $a-$disc;
                                     
                                 ?>
                                 <tr>
@@ -120,7 +124,7 @@
                                 </tr>
                                 <tr>
                                     <th>Sub Total</th>
-                                    <td align="right" colspan="5"><?php echo $ttl; ?></td>
+                                    <td align="right" colspan="5"><?php echo $sub; ?></td>
                                 </tr>
                                 <tr>
                                     <td align="center" colspan="6"><b>Pembayaran</b></td>
@@ -129,27 +133,14 @@
                                     <td colspan="6">
                                         <form action="" method="POST">
                                             <label for="">Masukkan Pembayaran</label>
-                                            <input type="number" class="form-control" min="1" name="byr" required><br>
+                                            <input type="number" class="form-control" min ="<?php echo $sub; ?>" name = "uang" required><br>
                                             <input type="submit" class="btn btn-success form-control" name="bayarrr" value="Bayar">
+                                            <td><input type="hidden" name = "kemb" value ="<?php echo $sub ?>"></td>
                                         </form>
                                     </td>
                                 </tr>
-                                <?php 
-                                    if (isset($_POST['bayarrr'])) {
-                                        $uang = $_POST['byr'];
-                                        if ($uang >= $ttl) {
-                                            $kmbl = $uang-$ttl;
-                                        } else if ($uang == $ttl){
-                                            $kmbl = $uang-$ttl;
-                                        } else {
-                                            $kmbl = "Uang Kurang";
-                                        }
-                                        
-                                    }
-                                ?>
                                 <tr>
-                                    <th>Kembalian</th>
-                                    <td align="right" colspan="5"><?php echo $kmbl; ?></td>
+                                    
                                 </tr>
                             </table>
                         </div>
@@ -158,6 +149,7 @@
             </div>
         </div>
     </div>
+    </form>
     <!-- end content -->
 
     <!-- JS -->
@@ -167,4 +159,11 @@
     <!-- End JS -->
 </body>
 </html>
-<?php } ?>
+    <?php } ?>
+
+
+<?php
+}else{
+    header("Location: login.php");
+}
+?>

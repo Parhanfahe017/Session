@@ -1,37 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="utf-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Assalaam Book Store</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-</head>
-<body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Assalaam</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="prosesakhir.php">Toko Buku<span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" name="logout">Logout</button>
-    </form>
-  </div>
-</nav>
-    <!-- end Navbar -->
+<?php
+session_start();
+if(isset($_SESSION['login'])) {
+?>
 
     <!-- content -->
     
@@ -46,13 +16,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Assalaam Book Store</title>
+    <title>Book Store</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 </head>
 <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Assalaam</a>
+  <a class="navbar-brand" href="#">Book</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -84,11 +54,11 @@
             $jenke = $_POST['jk'];
             $tanggal = $_POST['tgl'];
             
-            for ($i=1; $i <= $jml; $i++) { 
+            
     ?>
                     <div class="card-body">
-                        <form action="soalproses.php" method="POST">
-                            
+                        <form action="proses02.php" method="POST">
+                            <?php for ($i=1; $i <= $jml; $i++) { ?>
                             
                             <div class="form-group">
                                 <label for="">Judul Buku</label>
@@ -142,26 +112,18 @@
                 <?php } ?>
                     </div>
                 </div>
-            </div>
+            </div>    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- End JS -->     
+</body>
+</html>
         </div>
     </div>
     <!-- end content -->
 
 
-    <!-- JS -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.bundle.js"></script>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <!-- End JS -->     
-</body>
-</html>
-<!-- end content -->
-
-
-    <!-- JS -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.bundle.js"></script>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <!-- End JS -->     
-</body>
-</html>
+<?php
+}else{
+    header("Location: login.php");
+}
